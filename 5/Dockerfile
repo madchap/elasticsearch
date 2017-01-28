@@ -48,16 +48,16 @@ RUN set -ex \
 	&& for path in \
 		./data \
 		./logs \
-		./config \
-		./config/scripts \
 	; do \
 		mkdir -p "$path"; \
 		chown -R elasticsearch:elasticsearch "$path"; \
 	done
 
+RUN ln -sf /usr/share/elasticsearch/config /etc/elasticsearch
+
 COPY config ./config
 
-VOLUME /usr/share/elasticsearch
+VOLUME /usr/share/elasticsearch/data
 
 COPY docker-entrypoint.sh /
 
