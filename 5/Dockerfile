@@ -53,9 +53,9 @@ RUN set -ex \
 		chown -R elasticsearch:elasticsearch "$path"; \
 	done
 
-RUN ln -sf /usr/share/elasticsearch/config /etc/elasticsearch
+RUN ln -sf /etc/elasticsearch /usr/share/elasticsearch/config 
 
-COPY config ./config
+COPY config ./config/
 
 VOLUME /usr/share/elasticsearch/data
 
