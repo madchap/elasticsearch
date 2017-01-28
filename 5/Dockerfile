@@ -57,9 +57,12 @@ RUN set -ex \
 
 COPY config ./config
 
-VOLUME /usr/share/elasticsearch/data
+VOLUME /usr/share/elasticsearch
 
 COPY docker-entrypoint.sh /
+
+RUN bin/elasticsearch-plugin install --batch ingest-geoip
+RUN bin/elasticsearch-plugin install --batch repository-s3
 
 EXPOSE 9200 9300
 ENTRYPOINT ["/docker-entrypoint.sh"]
